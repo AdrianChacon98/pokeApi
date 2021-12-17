@@ -1,0 +1,39 @@
+<!--Tabla-->
+<table class=" container mt-5 table table-striped" *ngIf="listOfPokemones.length>0; else  listEmpty">
+
+  <thead>
+    <tr>
+      <th class="col">ID</th>
+      <th class="col">Nombre</th>
+      <th class="col">Peso</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let pokemon of listOfPokemones  | slice: (page-1) * pageSize : page * pageSize ">
+      <td scope="row">{{pokemon.id}}</td>
+      <td>{{pokemon.nombre}}</td>
+      <!--<ngb-highlight class="" [result]="pokemon.nombre" [term]="searchPokemon"></ngb-highlight>-->
+      <td>{{pokemon.peso}}</td>
+    </tr>
+  </tbody>
+</table>
+
+
+<!--Paginacion-->
+<div class="container-fluid">
+  <ngb-pagination [(page)]="page"
+  [pageSize]="pageSize"
+  [collectionSize]="listOfPokemones.length"  *ngIf="listOfPokemones.length>0"></ngb-pagination>
+</div>
+
+<!--Solo si la lista esta vacia-->
+<ng-template #listEmpty>
+  <div class="d-flex justify-content-center align-items-center mt-5">
+    <h1 class="">Pokemon not found</h1>
+  </div>
+</ng-template>
+
+
+
+
